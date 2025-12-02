@@ -12,3 +12,6 @@
     - If using Postman or thunderclient set the the method to 'GET' then paste the url I provide the run.   
         'http://localhost:3000/api/execute?message=Find%20me%20a%20cheap%20sushi%20restaurant%20in%20downtown%20Los%20Angeles%20that's%20open%20now%20and%20has%20at%20least%20a%204-star%20rating&code=pioneerdevai'
     - If using Web paste the url I provide and when trying to try another query try configuring through parameter in url.
+
+## Any assumptions or limitations in your implementation.
+Due to time constraints, the implementation may not cover all edge cases or optimizations, but it demonstrates the core functionality.
