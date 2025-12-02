@@ -12,10 +12,7 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "@api/fsq-developers-places": "file:.api/apis/fsq-developers-places",
-    "@cfworker/json-schema": "^4.1.1",
     "@google/genai": "^1.30.0",
-    "@modelcontextprotocol/sdk": "^1.23.0",
     "axios": "^1.13.2",
     "body-parser": "^2.2.1",
     "cors": "^2.8.5",
