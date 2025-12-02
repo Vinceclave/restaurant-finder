@@ -75,8 +75,33 @@ app.get('/api/execute', async(req, res) => {
             }
             }
 
-        
-        res.status(200).json({ result: parseText });
+
+            // using Foursquare Place API to search for restaurants base on structured JSON from AI
+            const searchPlace = await axios.get('https://places-api.foursquare.com/places/search', {
+                headers: {
+                    Authorization: `Bearer ${process.env.FOURSQUARE_API_KEY}`,
+                    'X-Places-Api-Version': '2025-06-17',
+                },
+                params: {
+                    query: parseText.parameters.query, 
+                    near: parseText.parameters.near,
+                    price: parseText.parameters.price,
+                    open_now: parseText.parameters.open_now,
+                }
+            })
+
+
+        // Constructing a required response format
+        const data = searchPlace.data.results.map((item: any) => ({
+                name: item.name,
+                address: item.location?.formatted_address || 'N/A',
+                cuisine: item.categories?.map((cat: any) => cat.name).join(', ') || 'N/A',
+                rating: item.rating ?? undefined,
+                price: item.price ?? undefined,
+                open_now: item.hours?.is_open ?? undefined,
+            }));
+
+        return res.status(200).json({message: 'Here are suggested places you want to visit:', results: data });
     } catch (error) {
         throw res.status(500).json({ error: 'Internal Server Error' });
     }
